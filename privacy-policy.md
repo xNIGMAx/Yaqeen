@@ -1,3 +1,9 @@
+---
+layout: default
+title: Privacy Policy
+permalink: /privacy/
+---
+
 # Privacy Policy For Yaqeen App (iOS)
 
 This Privacy Policy describes how the Yaqeen mobile application (“Yaqeen,” “we,” “our”) handles information when you use the app. Yaqeen is designed as a **privacy-first** app: your data stays on your device, and we do not operate accounts, servers, or third-party analytics for the app.
