@@ -68,6 +68,16 @@
     .back:hover { color: var(--ink-1); }
     .back::before { content: '←'; }
 
+    .lang-switch {
+      display: flex; justify-content: flex-end;
+      margin-bottom: 16px;
+    }
+    .lang-switch a {
+      font-size: 12px; font-weight: 500; color: var(--ink-3);
+      text-decoration: none; transition: color 0.2s ease;
+    }
+    .lang-switch a:hover { color: var(--teal); }
+
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(28px, 5vw, 40px);
@@ -168,6 +178,10 @@
 <div class="ambient"></div>
 
 <div class="page">
+  <div class="lang-switch">
+    <a href="privacy-policy-ar.html">العربية</a>
+  </div>
+
   <a href="index.html" class="back">Back to Yaqeen</a>
 
   <h1>Privacy Policy</h1>
@@ -302,6 +316,7 @@
   <footer>
     <p>© 2026 Yaqeen</p>
     <a href="index.html">← Back to home</a>
+    <a href="privacy-policy-ar.html">العربية</a>
   </footer>
 </div>
 

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سياسة الخصوصية — يقين</title>
+  <meta name="description" content="يقين تطبيق يُولي الخصوصية أولوية. لا حسابات، لا تتبّع، لا سحابة. كل شيء يبقى على جهازك." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0F172A" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-top:   #0F172A;
+      --bg-deep:  #162132;
+      --teal:     #3BA99C;
+      --gold:     #E8B86D;
+      --ink-1:    #F8FAFC;
+      --ink-2:    #94A3B8;
+      --ink-3:    #78859D;
+      --glass:    rgba(255,255,255,0.04);
+      --border:   rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-deep) 100%);
+      background-attachment: fixed;
+      color: var(--ink-1);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .ambient {
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .ambient::before {
+      content: '';
+      position: absolute;
+      width: 60vmax; height: 60vmax;
+      background: radial-gradient(circle, rgba(59,169,156,0.12) 0%, transparent 65%);
+      top: -20%; left: -15%;
+    }
+    .ambient::after {
+      content: '';
+      position: absolute;
+      width: 50vmax; height: 50vmax;
+      background: radial-gradient(circle, rgba(232,184,109,0.07) 0%, transparent 65%);
+      bottom: -15%; right: -15%;
+    }
+
+    .page { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 64px 24px 80px; }
+
+    .back {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500; color: var(--ink-2);
+      text-decoration: none; margin-bottom: 40px;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--ink-1); }
+    .back::before { content: '→'; }
+
+    .lang-switch {
+      display: flex; justify-content: flex-end;
+      margin-bottom: 16px;
+    }
+    .lang-switch a {
+      font-size: 12px; font-weight: 500; color: var(--ink-3);
+      text-decoration: none; transition: color 0.2s ease;
+    }
+    .lang-switch a:hover { color: var(--teal); }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 600; line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .effective {
+      font-size: 13px; color: var(--ink-3);
+      margin-bottom: 40px;
+    }
+
+    .summary {
+      background: rgba(59,169,156,0.07);
+      border: 0.75px solid rgba(59,169,156,0.2);
+      border-radius: 16px;
+      padding: 22px 24px;
+      margin-bottom: 48px;
+    }
+    .summary p {
+      font-size: 14px; color: var(--ink-2); line-height: 1.85; margin-bottom: 12px;
+    }
+    .summary p:last-child { margin-bottom: 0; }
+    .summary strong { color: var(--teal); font-weight: 600; }
+
+    h2 {
+      font-size: 16px; font-weight: 600;
+      color: var(--ink-1);
+      margin: 40px 0 14px;
+      padding-bottom: 10px;
+      border-bottom: 0.75px solid var(--border);
+    }
+
+    h3 {
+      font-size: 14px; font-weight: 600;
+      color: var(--ink-2);
+      margin: 24px 0 10px;
+    }
+
+    p {
+      font-size: 14px; color: var(--ink-2);
+      line-height: 1.85; margin-bottom: 14px;
+    }
+
+    ul, ol {
+      padding-right: 20px; padding-left: 0;
+      margin-bottom: 14px;
+    }
+    li {
+      font-size: 14px; color: var(--ink-2);
+      line-height: 1.85; margin-bottom: 6px;
+    }
+    li strong, p strong { color: var(--ink-1); font-weight: 600; }
+
+    .table-wrap { overflow-x: auto; margin-bottom: 20px; border-radius: 12px; }
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px;
+      background: var(--glass);
+      border: 0.75px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+    }
+    th {
+      background: rgba(255,255,255,0.05);
+      color: var(--ink-2); font-weight: 600;
+      padding: 12px 16px; text-align: right;
+      font-size: 12px;
+      border-bottom: 0.75px solid var(--border);
+    }
+    td {
+      padding: 11px 16px; color: var(--ink-2);
+      border-bottom: 0.75px solid var(--border);
+      vertical-align: top; line-height: 1.65;
+      text-align: right;
+    }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--ink-1); }
+    td.no { color: var(--teal); font-weight: 600; white-space: nowrap; }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    footer {
+      border-top: 0.75px solid var(--border);
+      margin-top: 64px; padding-top: 28px;
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: center;
+      gap: 12px 24px;
+    }
+    footer p, footer a { font-size: 12px; color: var(--ink-3); }
+    footer a:hover { color: var(--ink-1); }
+  </style>
+</head>
+<body>
+
+<div class="ambient"></div>
+
+<div class="page">
+  <div class="lang-switch">
+    <a href="privacy-policy.html">English</a>
+  </div>
+
+  <a href="index.html" class="back">العودة إلى يقين</a>
+
+  <h1>سياسة الخصوصية</h1>
+  <p class="effective">تطبيق يقين لـ iOS &nbsp;·&nbsp; سارية من: يونيو ٢٠٢٦</p>
+
+  <div class="summary">
+    <p>صُمّم يقين ليكون تطبيقاً <strong>يُولي الخصوصية أولوية</strong>. بياناتك تبقى على جهازك. لا نُشغّل حسابات ولا خوادم ولا تحليلات من طرف ثالث.</p>
+    <p><strong>لا حسابات</strong> — لا تحتاج إلى تسجيل الدخول لاستخدام يقين.</p>
+    <p><strong>لا خوادم ليقين</strong> — لا نستقبل بياناتك ولا نخزّنها على أي خادم.</p>
+    <p><strong>لا تحليلات ولا إعلانات من طرف ثالث</strong> — لا حِزم SDK ولا شبكات إعلانات ولا تتبّع عبر التطبيقات.</p>
+    <p><strong>احذف كل شيء</strong> — الإعدادات ← الخصوصية ← إعادة ضبط يقين يزيل جميع البيانات المحلية.</p>
+  </div>
+
+  <p>تصف هذه السياسة كيف يتعامل تطبيق يقين («يقين»، «نحن») مع المعلومات عند استخدامك للتطبيق. إن كانت لديك أسئلة، تواصل معنا عبر البريد الإلكتروني للدعم المذكور في صفحة التطبيق على App Store.</p>
+
+  <h2>المعلومات المخزّنة على جهازك</h2>
+  <p>يخزّن يقين البيانات التالية <strong>على جهازك فقط</strong> (باستخدام SwiftData من Apple ومجموعة App Group آمنة مشتركة بين التطبيق الرئيسي وامتداداته). لا تُرسَل أي من هذه البيانات إلى يقين أو إلى أي خادم نُشغّله.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>البيانات</th>
+          <th>الغرض</th>
+          <th>تغادر الجهاز؟</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>إعدادات المستخدم</strong></td>
+          <td>اللغة، الإشعارات، إعداد الصلاة، خيارات التفكر، تقدّم الإعداد الأولي، الاسم المعروض اختيارياً</td>
+          <td class="no">لا</td>
+        </tr>
+        <tr>
+          <td><strong>أحداث الصلاة</strong></td>
+          <td>متى ظهرت التذكيرات، ومتى أكّدت الصلاة («صلّيتُ»)، أو أغلقت التنبيهات — لتحسين التجربة داخل التطبيق فقط</td>
+          <td class="no">لا</td>
+        </tr>
+        <tr>
+          <td><strong>أحداث التفكر</strong></td>
+          <td>جلساتك وتقدّمك في المحتوى المضمّن داخل التطبيق</td>
+          <td class="no">لا</td>
+        </tr>
+        <tr>
+          <td><strong>تقدّم المحتوى</strong></td>
+          <td>عناصر التفكر أو الأسئلة التي شاهدتها أو أكملتها</td>
+          <td class="no">لا</td>
+        </tr>
+        <tr>
+          <td><strong>موقع الصلاة</strong></td>
+          <td>الإحداثيات لحساب أوقات الصلاة محلياً على جهازك</td>
+          <td class="no">لا</td>
+        </tr>
+        <tr>
+          <td><strong>اختيارات التطبيقات للدرع</strong></td>
+          <td>رموز Apple غير الشفافة تمثل التطبيقات/الفئات التي اخترت إيقافها أثناء نوافذ الصلاة أو التفكر</td>
+          <td class="no">لا</td>
+        </tr>
+        <tr>
+          <td><strong>عدّاد الذكر</strong></td>
+          <td>عدد النقرات اليومي والإجمالي للويدجت والعداد داخل التطبيق</td>
+          <td class="no">لا</td>
+        </tr>
+        <tr>
+          <td><strong>بيانات الجدولة</strong></td>
+          <td>نوافذ الصلاة المفعّلة وإعدادات الجدولة</td>
+          <td class="no">لا</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>رموز Family Activity (وقت الشاشة)</h3>
+  <p>عند اختيار التطبيقات للإيقاف، توفّر Apple <strong>رموزاً غير شفافة</strong> — وليست أسماء تطبيقات يمكن ليقين قراءتها خارج واجهة اختيار Apple. يخزّن يقين هذه الرموز محلياً لتطبيق الدرع خلال نوافذ الصلاة (والتفكر الاختياري) التي تُعدّها. لا يمكننا رؤية قائمة تطبيقاتك الكاملة أو سجل تصفّحك.</p>
+
+  <h3>المحتوى المضمّن</h3>
+  <p>تأملات قرآنية، أذكار، أسئلة، ومحتوى مشابه <strong>مضمّن داخل التطبيق</strong>. قراءته أو إكماله لا يُرسِل تقارير استخدام إلينا.</p>
+
+  <h2>الأذونات وكيفية استخدامها</h2>
+
+  <h3>وقت الشاشة / Family Controls (مطلوب لدرع الصلاة)</h3>
+  <p>يُستخدم <strong>فقط</strong> لإيقاف التطبيقات <strong>التي تختارها</strong> خلال <strong>نوافذ الصلاة التي تُعدّها</strong>. هذا ليس رقابة أبوية، ولا مراقبة لأشخاص آخرين، ولا حظراً للتطبيقات خارج نوافذك. إذا رُفض الإذن، لن يعمل درع الصلاة.</p>
+
+  <h3>الموقع (اختياري — أوقات الصلاة)</h3>
+  <p>يُستخدم لحساب أوقات الصلاة <strong>على جهازك</strong> باستخدام إحداثياتك. لا يُستخدم للتتبّع أو الإعلانات أو إرسال بيانات إلى خوادمنا (ليس لدينا خوادم).</p>
+
+  <h3>الإشعارات (اختياري)</h3>
+  <p>إشعارات محلية تُجدول على جهازك لتذكيرات الصلاة، وقفات التفكر، والأذكار. لا يستخدم يقين خادم إشعارات push.</p>
+
+  <p>لا يطلب يقين <strong>الوصول</strong> إلى الكاميرا أو الميكروفون أو جهات الاتصال أو التقويم أو الصور أو HealthKit أو Bluetooth.</p>
+
+  <h2>ما لا نجمعه</h2>
+  <ul>
+    <li>عناوين البريد الإلكتروني أو كلمات المرور (لا حسابات)</li>
+    <li>معرّفات الإعلانات</li>
+    <li>تحليلات أو أحداث استخدام تُرسَل إلى خدمات طرف ثالث</li>
+    <li>تقارير أعطال تُرسَل إلى أدوات طرف ثالث</li>
+    <li>تقارير وقت الشاشة أو استخدام التطبيقات تُرفع إلى خوادمنا</li>
+    <li>رسائل أو جهات اتصال أو وسائط من تطبيقات أخرى</li>
+  </ul>
+
+  <h2>امتدادات التطبيق والويدجتات</h2>
+  <p>يتضمّن يقين امتدادات معتمدة من Apple (واجهة درع وقت الشاشة، مراقبة النشاط، وويدجتات الشاشة الرئيسية وشاشة القفل). تعمل هذه على جهازك وتقرأ/تكتب فقط إلى نفس تخزين App Group مع التطبيق الرئيسي. هذا المشاركة لا تُرسِل بيانات خارج جهازك.</p>
+
+  <h2>الأطفال</h2>
+  <p>لا يستهدف يقين الأطفال دون ١٣ عاماً. وبما أننا لا نُشغّل حسابات ولا نجمع بيانات على خوادمنا، لا نستقبل بيانات أطفال من التطبيق. يمكنك إزالة جميع البيانات باستخدام <strong>إعادة ضبط يقين</strong> على ذلك الجهاز.</p>
+
+  <h2>خياراتك وتحكّمك</h2>
+  <ul>
+    <li><strong>تغيير الأذونات:</strong> إعدادات iOS ← يقين</li>
+    <li><strong>تغيير اختيار التطبيقات:</strong> أعد فتح منتقي التطبيقات داخل الإعدادات</li>
+    <li><strong>حذف جميع بيانات التطبيق:</strong> الإعدادات ← الخصوصية ← إعادة ضبط يقين (لا يمكن التراجع)</li>
+    <li><strong>إلغاء التثبيت:</strong> حذف التطبيق يزيله وبياناته المحلية من جهازك</li>
+  </ul>
+
+  <h2>الاحتفاظ بالبيانات</h2>
+  <p>تبقى البيانات على جهازك حتى تعيد ضبط التطبيق، أو تُلغي تثبيت يقين، أو تمحو الجهاز. لا نحتفظ بنسخ على خوادمنا لأننا لا نستقبل بياناتك.</p>
+
+  <h2>الأطراف الثالثة</h2>
+  <ul>
+    <li><strong>Apple Inc.</strong> — يستخدم يقين أُطر Apple (وقت الشاشة، الإشعارات، الموقع، الويدجتات). يخضع لـ <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">سياسة خصوصية Apple</a>.</li>
+    <li><strong>TestFlight</strong> — توزيع النسخ التجريبية يتم عبر Apple وفق شروطها.</li>
+    <li><strong>لا معالِجي بيانات آخرين</strong> — لا ندمج Firebase أو Mixpanel أو Amplitude أو شبكات إعلانات أو خدمات مشابهة.</li>
+  </ul>
+
+  <h2>الأمان</h2>
+  <p>تُحمى البيانات بأمان جهازك (رمز المرور، Face ID، Touch ID، التشفير أثناء التخزين الذي يوفّره iOS). لا ينقل يقين معلوماتك المخزّنة إلى أي خادم.</p>
+
+  <h2>التغييرات على هذه السياسة</h2>
+  <p>قد نحدّث هذه السياسة عند تغيّر التطبيق. سننشر النسخة المحدّثة على نفس الرابط ونغيّر تاريخ السريان. استمرارك في استخدام يقين بعد التحديث يعني موافقتك على السياسة المعدّلة.</p>
+
+  <h2>التواصل</h2>
+  <p>لأسئلة الخصوصية، استخدم جهة الدعم المذكورة في صفحة التطبيق على App Store ليقين.</p>
+
+  <footer>
+    <p>© ٢٠٢٦ يقين</p>
+    <a href="index.html">← العودة إلى الصفحة الرئيسية</a>
+    <a href="privacy-policy.html">English</a>
+  </footer>
+</div>
+
+</body>
+</html>
