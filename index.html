@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yaqeen — Pray on Time. Pause. Reflect.</title>
+  <meta name="description" content="Yaqeen gently pauses your apps during prayer time. Morning & evening azkar, dhikr counter, reflection shield, and 6 home screen widgets. Free. Private. On-device." />
+  <meta property="og:title" content="Yaqeen — Pray on Time. Pause. Reflect." />
+  <meta property="og:description" content="A prayer-first focus app for Muslims. No accounts. No tracking. Everything on your device." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0F172A" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-top:    #0F172A;
+      --bg-deep:   #162132;
+      --teal:      #3BA99C;
+      --teal-soft: rgba(59,169,156,0.12);
+      --gold:      #E8B86D;
+      --gold-soft: rgba(232,184,109,0.10);
+      --ink-1:     #F8FAFC;
+      --ink-2:     #94A3B8;
+      --ink-3:     #78859D;
+      --glass:     rgba(255,255,255,0.04);
+      --border:    rgba(255,255,255,0.07);
+      --border-s:  rgba(255,255,255,0.11);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-deep) 100%);
+      background-attachment: fixed;
+      color: var(--ink-1);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── AMBIENT BACKGROUND ── */
+    .ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .ambient::before {
+      content: '';
+      position: absolute;
+      width: 75vmax; height: 75vmax;
+      background: radial-gradient(circle, rgba(59,169,156,0.17) 0%, transparent 65%);
+      top: -28%; right: -18%;
+      animation: orbDrift 14s ease-in-out infinite alternate;
+    }
+    .ambient::after {
+      content: '';
+      position: absolute;
+      width: 65vmax; height: 65vmax;
+      background: radial-gradient(circle, rgba(232,184,109,0.10) 0%, transparent 65%);
+      bottom: -22%; left: -22%;
+      animation: orbDrift 18s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes orbDrift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(2%,3%) scale(1.06); }
+    }
+
+    section, header, footer { position: relative; z-index: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 64px;
+    }
+
+    .app-icon {
+      width: 100px; height: 100px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #1E4D48 0%, #0D2E2B 100%);
+      border: 0.75px solid rgba(59,169,156,0.35);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      margin: 0 auto 32px;
+      box-shadow: 0 0 0 0 rgba(59,169,156,0.4);
+      animation: iconGlow 3s ease-in-out infinite alternate, fadeUp 0.6s ease both;
+      font-size: 54px;
+      line-height: 1;
+      position: relative;
+      user-select: none;
+    }
+    .app-icon::after {
+      content: '◆ ◆';
+      font-size: 7px;
+      color: var(--gold);
+      letter-spacing: 3px;
+      margin-top: 2px;
+    }
+    @keyframes iconGlow {
+      from { box-shadow: 0 0 24px rgba(59,169,156,0.20), 0 8px 40px rgba(0,0,0,0.5); }
+      to   { box-shadow: 0 0 52px rgba(59,169,156,0.42), 0 8px 40px rgba(0,0,0,0.5); }
+    }
+
+    .eyebrow {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(56px, 11vw, 96px);
+      font-weight: 600; line-height: 1;
+      letter-spacing: -1.5px;
+      margin-bottom: 6px;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    .hero-arabic {
+      font-size: clamp(20px, 4vw, 30px);
+      color: var(--gold);
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease 0.3s both;
+      opacity: 0.85;
+    }
+
+    .hero-tagline {
+      font-size: clamp(15px, 2.5vw, 18px);
+      color: var(--ink-2);
+      max-width: 380px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      animation: fadeUp 0.6s ease 0.4s both;
+    }
+
+    .cta-group {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 12px;
+      animation: fadeUp 0.6s ease 0.52s both;
+    }
+
+    .btn-store {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--ink-1);
+      color: var(--bg-top);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px; font-weight: 600;
+      padding: 14px 26px; border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-store:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.55);
+    }
+    .btn-store svg { flex-shrink: 0; }
+
+    .btn-tf {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--glass);
+      color: var(--ink-1);
+      font-size: 14px; font-weight: 500;
+      padding: 11px 22px; border-radius: 12px;
+      border: 0.75px solid var(--border-s);
+      text-decoration: none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .btn-tf:hover { background: rgba(255,255,255,0.08); transform: translateY(-1px); }
+
+    .trust-line {
+      margin-top: 30px;
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 6px 18px;
+      animation: fadeUp 0.6s ease 0.65s both;
+    }
+    .trust-line span {
+      font-size: 11px; color: var(--ink-3);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .trust-line span::before { content: '·'; color: var(--teal); font-size: 16px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 48px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--teal), transparent);
+      margin: 0 auto;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-head {
+      text-align: center;
+      padding: 0 24px;
+    }
+    .section-head .eyebrow { display: block; margin-bottom: 12px; }
+    .section-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 5vw, 38px);
+      font-weight: 600; line-height: 1.2;
+    }
+
+    /* ── CAROUSEL ── */
+    .carousel-section { padding: 88px 0 72px; }
+
+    .carousel-section .section-head { margin-bottom: 52px; }
+
+    .carousel-wrap {
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+    }
+    .carousel-wrap:active { cursor: grabbing; }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      will-change: transform;
+      transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+      user-select: none;
+    }
+
+    .c-slide {
+      flex: 0 0 auto;
+      width: 240px;
+      transition: transform 0.55s ease, opacity 0.55s ease, filter 0.55s ease;
+      transform: scale(0.91);
+      opacity: 0.4;
+      filter: brightness(0.8);
+    }
+    .c-slide.active {
+      transform: scale(1);
+      opacity: 1;
+      filter: brightness(1);
+    }
+    .c-slide img {
+      width: 100%;
+      border-radius: 30px;
+      display: block;
+      pointer-events: none;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+    .c-slide.active img {
+      box-shadow: 0 32px 80px rgba(0,0,0,0.65), 0 0 0 0.75px rgba(59,169,156,0.2);
+    }
+
+    .carousel-dots {
+      display: flex; justify-content: center;
+      gap: 7px; margin-top: 36px;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--ink-3);
+      border: none; cursor: pointer; padding: 0;
+      transition: all 0.35s ease;
+    }
+    .dot.active {
+      width: 22px; border-radius: 3px;
+      background: var(--teal);
+    }
+
+    /* ── FEATURES ── */
+    .features-section {
+      padding: 24px 24px 88px;
+      max-width: 940px;
+      margin: 0 auto;
+    }
+    .features-section .section-head { margin-bottom: 44px; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .f-card {
+      background: var(--glass);
+      border: 0.75px solid var(--border);
+      border-radius: 22px;
+      padding: 24px 22px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    .f-card.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .f-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,169,156,0.32);
+      box-shadow: 0 8px 32px rgba(59,169,156,0.07);
+    }
+    .f-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: var(--teal-soft);
+      border: 0.75px solid rgba(59,169,156,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+    .f-card h3 {
+      font-size: 14px; font-weight: 600;
+      color: var(--ink-1);
+      margin-bottom: 6px; line-height: 1.3;
+    }
+    .f-card p {
+      font-size: 13px; color: var(--ink-2);
+      line-height: 1.6;
+    }
+
+    /* ── TRUST SECTION ── */
+    .trust-section {
+      border-top: 0.75px solid var(--border);
+      padding: 72px 24px;
+      text-align: center;
+    }
+    .trust-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(18px, 3vw, 24px);
+      color: var(--ink-2);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.55;
+    }
+    .trust-pills {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 10px;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500;
+      color: var(--teal);
+      background: var(--teal-soft);
+      border: 0.75px solid rgba(59,169,156,0.22);
+      padding: 7px 15px; border-radius: 100px;
+      transition: background 0.2s ease;
+    }
+    .pill:hover { background: rgba(59,169,156,0.18); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 0.75px solid var(--border);
+      padding: 28px 24px;
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: center;
+      gap: 16px 32px;
+    }
+    footer p { font-size: 12px; color: var(--ink-3); }
+    footer a {
+      font-size: 12px; color: var(--ink-2);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    footer a:hover { color: var(--ink-1); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .c-slide { width: 210px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="ambient"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="app-icon">ي</div>
+
+  <p class="eyebrow">Pause · Reflect · Intend</p>
+
+  <h1>Yaqeen</h1>
+  <p class="hero-arabic">يقين</p>
+
+  <p class="hero-tagline">
+    Pause before you scroll.<br>Pray on time. Stay in remembrance.
+  </p>
+
+  <div class="cta-group">
+    <!-- Replace href with your App Store URL when live -->
+    <a href="#" class="btn-store">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+      </svg>
+      Download on the App Store
+    </a>
+    <!-- Replace href with your TestFlight link -->
+    <a href="#" class="btn-tf">Join TestFlight Beta</a>
+  </div>
+
+  <div class="trust-line">
+    <span>No accounts</span>
+    <span>No tracking</span>
+    <span>Everything on your device</span>
+  </div>
+</section>
+
+<!-- ═══ CAROUSEL ═══ -->
+<section class="carousel-section">
+  <div class="section-head">
+    <span class="eyebrow">See it in action</span>
+    <h2>Everything you need,<br>nothing you don't.</h2>
+  </div>
+
+  <div class="carousel-wrap" id="carouselWrap" role="region" aria-label="App screenshots">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="c-slide active">
+        <img src="mockups/1.png" alt="Prayer Sanctuary — never miss a prayer again" />
+      </div>
+      <div class="c-slide">
+        <img src="mockups/2.png" alt="Azkar — remember Allah wherever you are" />
+      </div>
+      <div class="c-slide">
+        <img src="mockups/3.png" alt="Widgets — Yaqeen always with you" />
+      </div>
+      <div class="c-slide">
+        <img src="mockups/4.png" alt="Reflection — pause, reflect, learn" />
+      </div>
+      <div class="c-slide">
+        <img src="mockups/5.png" alt="Dhikr counter on your lock screen" />
+      </div>
+      <div class="c-slide">
+        <img src="mockups/6.png" alt="Gentle notifications — personalize Yaqeen" />
+      </div>
+      <div class="c-slide">
+        <img src="mockups/7.png" alt="Settings — tailor Yaqeen to your daily life" />
+      </div>
+    </div>
+  </div>
+
+  <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Carousel navigation"></div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section class="features-section">
+  <div class="section-head">
+    <span class="eyebrow">What's inside</span>
+    <h2>Built around your five daily prayers.</h2>
+  </div>
+
+  <div class="features-grid">
+    <div class="f-card">
+      <div class="f-icon">🌙</div>
+      <h3>Prayer Sanctuary</h3>
+      <p>Apps you choose stay paused at each prayer window. Tap "I prayed" to unlock — until the next salah.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon">📿</div>
+      <h3>Azkar Sessions</h3>
+      <p>Morning, evening, and post-prayer remembrance. Tap through each dhikr at your own pace with optional daily reminders.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon">🔢</div>
+      <h3>Dhikr Counter</h3>
+      <p>A tap-to-count ring on your Home Screen and Lock Screen. Daily total and lifetime count, always in view.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon">✦</div>
+      <h3>Reflection Shield</h3>
+      <p>After a set amount of screen time, a gentle prompt appears — a Quranic verse, a quote, or a question to pause on.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon">⊞</div>
+      <h3>6 Home & Lock Widgets</h3>
+      <p>Prayer grid, next prayer countdown, Hijri date, daily reflection, today's pauses, and the dhikr counter ring.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon">🔒</div>
+      <h3>Fully Private</h3>
+      <p>No accounts. No analytics. No cloud. Every reflection, schedule, and setting stays only on your iPhone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRUST ═══ -->
+<div class="trust-section">
+  <p class="trust-quote">
+    "Insert intentionality between impulse and action."
+  </p>
+  <div class="trust-pills">
+    <span class="pill">✓ No Accounts</span>
+    <span class="pill">✓ No Cloud Sync</span>
+    <span class="pill">✓ No Third-Party Analytics</span>
+    <span class="pill">✓ On-Device Only</span>
+    <span class="pill">✓ Delete Anytime</span>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>© 2026 Yaqeen</p>
+  <a href="privacy-policy.html">Privacy Policy</a>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Carousel ──────────────────────────────────────────────
+  const wrap  = document.getElementById('carouselWrap');
+  const track = document.getElementById('carouselTrack');
+  const dotsEl = document.getElementById('carouselDots');
+  const slides = Array.from(track.children);
+  const GAP    = 20; // matches CSS gap
+  const INTERVAL = 4000;
+
+  let current = 0;
+  let autoTimer = null;
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragCurrentX = 0;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'dot' + (i === 0 ? ' active' : '');
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-label', 'Slide ' + (i + 1));
+    btn.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(btn);
+  });
+
+  const dots = Array.from(dotsEl.children);
+
+  function slideW() {
+    return slides[0].offsetWidth + GAP;
+  }
+
+  function centerOffset() {
+    return (wrap.offsetWidth - slides[0].offsetWidth) / 2;
+  }
+
+  function applyTransform(animated) {
+    if (!animated) track.style.transition = 'none';
+    track.style.transform = `translateX(${centerOffset() - current * slideW()}px)`;
+    if (!animated) {
+      // Force reflow then restore transition
+      track.offsetHeight; // eslint-disable-line no-unused-expressions
+      track.style.transition = '';
+    }
+  }
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = ((index % slides.length) + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    applyTransform(true);
+  }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(() => goTo(current + 1), INTERVAL);
+  }
+
+  function stopAuto() {
+    clearInterval(autoTimer);
+    autoTimer = null;
+  }
+
+  // Initial position (no animation)
+  applyTransform(false);
+  startAuto();
+
+  // Pause on hover
+  wrap.addEventListener('mouseenter', stopAuto);
+  wrap.addEventListener('mouseleave', startAuto);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { stopAuto(); goTo(current + 1); startAuto(); }
+    if (e.key === 'ArrowLeft')  { stopAuto(); goTo(current - 1); startAuto(); }
+  });
+
+  // Touch / mouse drag
+  function onDragStart(x) {
+    isDragging = true;
+    dragStartX = x;
+    dragCurrentX = x;
+    stopAuto();
+    track.style.transition = 'none';
+  }
+
+  function onDragMove(x) {
+    if (!isDragging) return;
+    dragCurrentX = x;
+    const base = centerOffset() - current * slideW();
+    track.style.transform = `translateX(${base + (dragCurrentX - dragStartX)}px)`;
+  }
+
+  function onDragEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.transition = '';
+    const diff = dragStartX - dragCurrentX;
+    if (Math.abs(diff) > 44) {
+      goTo(diff > 0 ? current + 1 : current - 1);
+    } else {
+      applyTransform(true);
+    }
+    startAuto();
+  }
+
+  wrap.addEventListener('mousedown',  e => onDragStart(e.clientX));
+  window.addEventListener('mousemove', e => onDragMove(e.clientX));
+  window.addEventListener('mouseup',   () => onDragEnd());
+
+  wrap.addEventListener('touchstart', e => onDragStart(e.touches[0].clientX), { passive: true });
+  wrap.addEventListener('touchmove',  e => onDragMove(e.touches[0].clientX),  { passive: true });
+  wrap.addEventListener('touchend',   () => onDragEnd());
+
+  // Recalc on resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => applyTransform(false), 80);
+  });
+
+  // ── Scroll-reveal for feature cards ───────────────────────
+  const cards = document.querySelectorAll('.f-card');
+
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const idx = Array.from(cards).indexOf(entry.target);
+      setTimeout(() => entry.target.classList.add('visible'), idx * 90);
+      revealObs.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+
+  cards.forEach(c => revealObs.observe(c));
+})();
+</script>
+</body>
+</html>
