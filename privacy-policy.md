@@ -14,7 +14,6 @@ If you have questions about this policy, contact us at the support email listed 
 
 - **No accounts** — you do not sign in to use Yaqeen.
 - **No Yaqeen servers** — we do not receive or store your personal data on our own backend.
-- **No third-party analytics or advertising** — we do not use analytics SDKs, ad networks, or cross-app tracking.
 - **Anonymous analytics** — Yaqeen uses Firebase Analytics (by Google) to collect anonymous, aggregated usage events (for example, that an onboarding step or reflection session was completed). These events are **not linked to your identity**, contain no personal data, and are **not used for advertising or cross-app tracking**. See Google's privacy information at https://firebase.google.com/support/privacy.
 - **On-device storage only** — settings, prayer activity, reflections, and related data are stored locally on your iPhone (and shared only with Apple system components and Yaqeen’s own app extensions on the same device, as described below).
 - **You can delete everything** — Settings → Privacy → **Reset Yaqeen** removes local app data and returns you to onboarding.
@@ -81,8 +80,7 @@ We do **not** collect, and Yaqeen is not built to transmit to us:
 - Email addresses or passwords (no accounts)
 - Name or identity beyond an optional **preferred name** you type in Settings (stored only on device)
 - Advertising identifiers
-- Analytics or usage events sent to third-party services
-- Personally-identifying analytics or usage events sent to third-party services
+ - Personally-identifying analytics or usage events sent to third-party services
 - Crash reports sent to third-party crash reporters
 - Payment or purchase history (no in-app purchases in v1.0 as described in this policy’s effective version)
 - Screen-time or app-usage reports uploaded to our servers
