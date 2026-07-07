@@ -80,7 +80,7 @@ We do **not** collect, and Yaqeen is not built to transmit to us:
 - Email addresses or passwords (no accounts)
 - Name or identity beyond an optional **preferred name** you type in Settings (stored only on device)
 - Advertising identifiers
- - Personally-identifying analytics or usage events sent to third-party services
+- Personally-identifying analytics or usage events sent to third-party services
 - Crash reports sent to third-party crash reporters
 - Payment or purchase history (no in-app purchases in v1.0 as described in this policy’s effective version)
 - Screen-time or app-usage reports uploaded to our servers
